@@ -1,0 +1,49 @@
+<idea-plugin version="2">
+    <id>com.xiaosu.findview</id>
+    <name>AutoFindView</name>
+    <version>1.0.0</version>
+    <vendor email="shubw@icloud.com" url="http://www.haoyisheng.com">好医生集团</vendor>
+
+    <description><![CDATA[
+      快速添加findViewById代码的插件.<br>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      <html>
+      <b>1.0.0</b>
+          <ul>
+            <li>支持Activity,Fragment下的findViewById</li>
+          </ul>
+      </html>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="141.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <actions>
+        <action id="findViewAction"
+                class="com.xiaosu.findview.FindViewAction"
+                text="findViewById"
+                icon="/icons/icon.png"
+                description="在Activity和Fragment中生成findViewById">
+
+            <keyboard-shortcut
+                    keymap="$default"
+                    first-keystroke="shift control B"/>
+            <add-to-group group-id="GenerateGroup"/>
+            <!-- <add-to-group group-id="ProjectViewPopupMenu" /> file pop-up -->
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.xiaosu.findview.Settings"/>
+    </extensions>
+
+</idea-plugin>
