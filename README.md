@@ -3,4 +3,4 @@
 
 ![image](https://github.com/shubowen/findViewByMe/tree/master/image/findViewByMe.gif)
 
-本插件的技术和灵感借鉴与[butterknife-zelezny](http://example.net/).非常感谢！
+本插件的技术和灵感借鉴与[butterknife-zelezny](https://github.com/avast/android-butterknife-zelezny).非常感谢！
