@@ -32,6 +32,10 @@ public class FindViewWriter extends WriteCommandAction.Simple {
 
     @Override
     protected void run() throws Throwable {
+
+        filterElementHasFind(mClass.findMethodsByName("findView", false)[0],
+                mClass.findMethodsByName("onCreate", false)[0]);
+
         generateFields();
         generateFindView();
 
@@ -127,6 +131,30 @@ public class FindViewWriter extends WriteCommandAction.Simple {
                             ((element.nameFull != null && element.nameFull.length() > 0) ? element.nameFull : element.name)
                             + ") findViewById(R.id." + element.id + ");\n", mClass));
         }
+    }
+
+    private void filterElementHasFind(PsiMethod... methods) {
+        for (PsiMethod method : methods) {
+            if (null == method) return;
+
+            for (PsiStatement statement : method.getBody().getStatements()) {
+                if (statement.getFirstChild() instanceof PsiAssignmentExpression) {
+                    PsiAssignmentExpression pai = (PsiAssignmentExpression) statement.getFirstChild();
+                    //获取右边表达式
+                    PsiElement rightExp = pai.getRExpression().getLastChild();
+                    Element element = findElement(rightExp.getText());
+                    if (null != element) element.used = false;
+                }
+            }
+        }
+    }
+
+    private Element findElement(String text) {
+        for (Element element : mElements) {
+            if (text.contains(element.id))
+                return element;
+        }
+        return null;
     }
 
     /**
